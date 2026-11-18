@@ -33,7 +33,8 @@ jobs:
           which kubectl || echo "kubectl not found"
           kubectl version --client || echo "kubectl unavailable"
 
-      echo "========== Environment Check Completed =========="
+          echo "========== Environment Check Completed =========="
+
       - run:
           name: Authenticate with google cloud
           command: |
