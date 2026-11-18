@@ -19,8 +19,8 @@ jobs:
       - setup_remote_docker
 
       - run:
-        name: Check Environment
-        command: |
+          name: Check Environment
+          command: |
             echo "========== Docker =========="
             which docker || echo "Docker CLI not found"
             docker --version || echo "Docker version unavailable"
