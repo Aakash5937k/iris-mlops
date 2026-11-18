@@ -1,20 +1,20 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: flops-app
+  name: mlops-app
 spec:
   replicas: 2
   selector:
     matchLabels:
-      app: flops-app
+      app: mlops-app
   template:
     metadata:
       labels:
-        app: flops-app
+        app: mlops-app
     spec:
       containers:
-      - name: flops-app
-        image: us-east4-docker.pkg.dev/project-d45e7cf3-58e8-4f79-bdc/flops-app/mlops-app:latest
+      - name: mlops-app
+        image: us-east4-docker.pkg.dev/project-d45e7cf3-58e8-4f79-bdc/mlops-app/mlops-app:latest
         ports:
         - containerPort: 5000
 
@@ -26,7 +26,7 @@ metadata:
   name: mlops-service
 spec:
   selector:
-    app: flops-app
+    app: mlops-app
   ports:
     - protocol: TCP
       port: 80

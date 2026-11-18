@@ -19,21 +19,10 @@ jobs:
       - setup_remote_docker
 
       - run:
-          name: Check Environment
+          name: Install Docker CLI
           command: |
-            echo "========== Docker =========="
-            which docker || echo "Docker CLI not found"
-            docker --version || echo "Docker version unavailable"
-
-            echo "========== Google Cloud =========="
-            which gcloud || echo "gcloud not found"
-            gcloud --version || echo "gcloud unavailable"
-
-            echo "========== Kubernetes =========="
-            which kubectl || echo "kubectl not found"
-            kubectl version --client || echo "kubectl unavailable"
-
-            echo "========== Environment Check Completed =========="
+            apt-get update
+            apt-get install -y docker.io
 
       - run:
           name: Authenticate with google cloud
@@ -45,8 +34,8 @@ jobs:
       - run:
           name: Build and Push Image
           command: |
-              docker build -t us-east4-docker.pkg.dev/$GOOGLE_PROJECT_ID/flops-app/flops-app:latest .
-              docker push us-east4-docker.pkg.dev/$GOOGLE_PROJECT_ID/flops-app/flops-app:latest
+              docker build -t us-east4-docker.pkg.dev/$GOOGLE_PROJECT_ID/mlops-app/mlops-app:latest .
+              docker push us-east4-docker.pkg.dev/$GOOGLE_PROJECT_ID/mlops-app/mlops-app:latest
 
   deploy_to_gke:
     executor: docker-executor
