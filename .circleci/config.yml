@@ -19,19 +19,21 @@ jobs:
       - setup_remote_docker
 
       - run:
-          name: Check Environment
-          command: |
-            echo "Docker:"
-            which docker
-            docker --version
+        name: Check Environment
+        command: |
+          echo "========== Docker =========="
+          which docker || echo "Docker CLI not found"
+          docker --version || echo "Docker version unavailable"
 
-            echo "Google Cloud:"
-            which gcloud
-            gcloud --version
+          echo "========== Google Cloud =========="
+          which gcloud || echo "gcloud not found"
+          gcloud --version || echo "gcloud unavailable"
 
-            echo "Kubectl:"
-            which kubectl
-            kubectl version --client
+          echo "========== Kubernetes =========="
+          which kubectl || echo "kubectl not found"
+          kubectl version --client || echo "kubectl unavailable"
+
+      echo "========== Environment Check Completed =========="
       - run:
           name: Authenticate with google cloud
           command: |
