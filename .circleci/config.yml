@@ -17,6 +17,21 @@ jobs:
     steps:
       - checkout
       - setup_remote_docker
+
+      - run:
+          name: Check Environment
+          command: |
+            echo "Docker:"
+            which docker
+            docker --version
+
+            echo "Google Cloud:"
+            which gcloud
+            gcloud --version
+
+            echo "Kubectl:"
+            which kubectl
+            kubectl version --client
       - run:
           name: Authenticate with google cloud
           command: |
